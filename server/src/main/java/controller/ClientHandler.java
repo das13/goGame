@@ -55,9 +55,13 @@ public class ClientHandler extends Thread {
             LOGGER.error(e);
         } finally {
             xmlGenerator.checkAfterPlayerExit();
+            writer.close();
             try {
-                writer.close();
                 reader.close();
+            } catch (IOException e) {
+                LOGGER.error("IOException", e);
+            }
+            try {
                 clientSocket.close();
             } catch (IOException e) {
                 LOGGER.error("IOException", e);
@@ -65,4 +69,3 @@ public class ClientHandler extends Thread {
         }
     }
 }
-
